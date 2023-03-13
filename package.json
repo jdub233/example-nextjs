@@ -2,6 +2,15 @@
   "name": "example-nextjs",
   "version": "0.1.0",
   "private": true,
+  "files": [
+    "package.json",
+    "next.config.js",
+    "public",
+    "src",
+    "jsconfig.json",
+    ".env.local",
+    "next.config.js"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
