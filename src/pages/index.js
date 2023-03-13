@@ -19,7 +19,7 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.description}>
           <p>
-            Automated!&nbsp;
+            Automated Deployment!&nbsp;
             <code className={styles.code}>src/pages/index.js</code>
           </p>
           <p>and more stuff with {process.env.NEXT_PUBLIC_SEKRET} {process.env.DEPLOY_SEKRET}</p>
