@@ -105,7 +105,7 @@ export async function getServerSideProps() {
   const json = await res.json()
 
   console.log('server side db password ', process.env.NEO4J_PASSWORD);
-  console.log('server side db url ', process.env.NEO4J_UR);
+  console.log('server side db url ', process.env.NEO4J_URL);
   console.log('server side username ', process.env.NEO4J_USERNAME);
 
   console.log(json.html_url);
