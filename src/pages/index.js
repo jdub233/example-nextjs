@@ -5,9 +5,6 @@ import styles from '@/styles/Home.module.css'
 
 
 export default function Home({data}) {
-  console.log('hey');
-  console.log(process.env.NEXT_PUBLIC_SEKRET);
-
   return (
     <>
       <Head>
@@ -24,7 +21,6 @@ export default function Home({data}) {
               Here is some server side data {data.html_url}
             </code>
           </p>
-          <p>and more stuff with {process.env.NEXT_PUBLIC_SEKRET}</p>
           <div>
               By{' '}
               <Image
@@ -108,7 +104,9 @@ export async function getServerSideProps() {
   const res = await fetch('https://api.github.com/repos/vercel/next.js')
   const json = await res.json()
 
-  console.log('server side secret: ', process.env.SEKRET_TOKEN);
+  console.log('server side db password ', process.env.NEO4J_PASSWORD);
+  console.log('server side db url ', process.env.NEO4J_UR);
+  console.log('server side username ', process.env.NEO4J_USERNAME);
 
   console.log(json.html_url);
 
