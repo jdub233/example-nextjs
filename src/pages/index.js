@@ -4,7 +4,7 @@ import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 
 
-export default function Home() {
+export default function Home({data}) {
   console.log('hey');
   console.log(process.env.NEXT_PUBLIC_SEKRET);
 
@@ -20,7 +20,9 @@ export default function Home() {
         <div className={styles.description}>
           <p>
             Automated Deployment with secrets!&nbsp;
-            <code className={styles.code}>src/pages/index.js</code>
+            <code className={styles.code}>
+              Here is some server side data {data.html_url}
+            </code>
           </p>
           <p>and more stuff with {process.env.NEXT_PUBLIC_SEKRET}</p>
           <div>
@@ -100,4 +102,13 @@ export default function Home() {
       </main>
     </>
   )
+}
+
+export async function getServerSideProps() {
+  const res = await fetch('https://api.github.com/repos/vercel/next.js')
+  const json = await res.json()
+
+  console.log(json.html_url);
+
+  return { props: { data: json } }
 }
