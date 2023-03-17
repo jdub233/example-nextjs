@@ -108,6 +108,8 @@ export async function getServerSideProps() {
   const res = await fetch('https://api.github.com/repos/vercel/next.js')
   const json = await res.json()
 
+  console.log('server side secret: ', process.env.SEKRET_TOKEN);
+
   console.log(json.html_url);
 
   return { props: { data: json } }

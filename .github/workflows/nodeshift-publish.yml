@@ -20,6 +20,7 @@ jobs:
       - name: Create .env.local with secret environment variables
         run: |
           echo "NEXT_PUBLIC_SEKRET=${{ secrets.NEXT_PUBLIC_SEKRET }}" >> .env.local
+          echo "SEKRET_TOKEN=${{ secrets.SEKRET_TOKEN }}" >> .env.local
       - name: Nodeshift deploy
         run: |
           npx nodeshift NPM_RUN="npm start" --deploy.port 3000 --expose \
