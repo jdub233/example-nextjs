@@ -1,10 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
 
+import { read } from '../lib/neo4js';
+
 import styles from '@/styles/Home.module.css'
 
 
-export default function Home({data}) {
+export default function Home({ data }) {
   return (
     <>
       <Head>
@@ -16,9 +18,9 @@ export default function Home({data}) {
       <main className={styles.main}>
         <div className={styles.description}>
           <p>
-            Automated Deployment with secrets!&nbsp;
+          Example neo4j data&nbsp;
             <code className={styles.code}>
-              Here is some server side data {data.html_url}
+              from the example movie database
             </code>
           </p>
           <div>
@@ -35,6 +37,11 @@ export default function Home({data}) {
         </div>
 
         <div className={styles.center}>
+          <div className={styles.grid}>
+            {data.map(({movie}, index) => (
+              <div key={index}>{movie.title}</div>
+            ))}
+          </div>
         </div>
 
         <div className={styles.grid}>
@@ -100,15 +107,17 @@ export default function Home({data}) {
   )
 }
 
-export async function getServerSideProps() {
-  const res = await fetch('https://api.github.com/repos/vercel/next.js')
-  const json = await res.json()
+export async function getServerSideProps({ query, params }) {
+  const data = await read(`
+    MATCH (m:Movie)
+    RETURN m {
+      .title
+    } AS movie
+  `, {});
 
-  console.log('server side db password ', process.env.NEO4J_PASSWORD);
-  console.log('server side db url ', process.env.NEO4J_URL);
-  console.log('server side username ', process.env.NEO4J_USERNAME);
-
-  console.log(json.html_url);
-
-  return { props: { data: json } }
-}
+  return {
+    props: {
+      data
+    }
+  };
+};
